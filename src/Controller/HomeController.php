@@ -5,14 +5,14 @@ namespace App\Controller; // App = Src/
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 // Pour crerr une page :
 // - une fonction public (classe)
 // -  une route
 // - une response
 
-class HomeController extends Controller {
+class HomeController extends AbstractController {
 
     /**
      * Creation de notre 1ère route

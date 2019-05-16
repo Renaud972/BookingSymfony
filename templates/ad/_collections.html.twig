@@ -1,0 +1,91 @@
+{# View du sous-formulaire #}
+
+{% block _annonce_images_widget %}
+
+    <p>Ici, vous pouvez ajouter des images supp</p>
+
+    <input type="hidden" id="widget-count" value="0">
+
+    <button type="button" class="btn btn-secondary" id="add-image">Ajouter une image</button>
+
+    {{ form_widget(form) }}
+    
+{% endblock %}
+
+
+{% block _annonce_images_entry_row %}
+
+    {{ form_widget(form)}}
+    
+{% endblock %}
+
+
+{% block _annonce_images_entry_widget %}
+
+    <div class="form-group" id="bloc_{{id}}">
+        <div class="row">
+
+            <div class="col-md-10 col-10">
+
+                <div class="row">
+
+                    <div class="col">
+                        {{ form_widget(form.url) }}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.caption) }}
+                    </div>
+                
+                </div>
+            </div>
+
+            <div class="col-md-2 col-2">
+
+                <button type="button "class="btn btn-danger" data-action="delete" data-target="#bloc_{{id}}">X</button>
+            
+            
+            </div>
+                
+        </div>
+        
+    </div>
+    
+{% endblock %}
+
+
+
+
+
+
+
+{# Modification des inputs en fct du type/ hors thème pour les forms2 #}
+{# {% block form_row %}
+
+    <div class="form-group">
+    
+        {{ form_label(form)}}
+        {{ form_widget(form)}}
+    
+    </div>
+    
+{% endblock %} #}
+
+{# {% block text_widget %}
+    <input type="text" name="{{ full_name }}" id="{{id}}" class="form-control">
+{% endblock %}
+
+{% block textarea_widget %}
+    <textarea name="{{ full_name }}" id="{{id}}" class="form-control" cols="30" rows="10"></textarea>
+{% endblock %}
+
+{% block file_widget %}
+    <input type="file" name="{{ full_name }}" id="{{id}}" class="form-control">
+{% endblock %}
+
+{% block number_widget %}
+    <input type="number" name="{{ full_name }}" id="{{id}}" class="form-control">
+{% endblock %}
+
+{% block integer_widget %}
+    <input type="integer" name="{{ full_name }}" id="{{id}}" class="form-control">
+{% endblock %} #}

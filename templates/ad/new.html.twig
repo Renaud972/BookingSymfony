@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{# Modification des inputs en fct du type/ hors thème pour les forms#}
+{# {% form_theme form _self %} #}
+
+{% form_theme form 'ad/_collections.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+
+        <h1>Création d'une nouvelle annonce</h1>
+
+        {#  Première méthode #}
+        {{ form_start(form) }}            
+
+           {# <div class="form-group">
+                {{form_label(form.title)}}
+                {{ form_widget(form.title,{'attr':{'class':'form-control','placeholder':'Titre de l\'annonce'}})}}
+            </div>#}
+
+        {{ form_widget(form)}}
+
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+
+        {{ form_end(form) }}  
+
+        {#  2éme méthode 
+        {{ form(form) }}#}
+    </div>
+{% endblock %}
+
