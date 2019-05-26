@@ -63,23 +63,29 @@
 
             <div class="col">
 
+                {% set a = ad.author %}
+
                 <div class="row">
 
                     <div class="col-4">
-                        <img src="http://placehold.it/64x64" alt="">                   
+                        <a href="{{path('user_show',{'alias' : a.alias })}}">
+                            <img src="{{ a.avatar }}" alt="{{ a.fullname }}" class="avatar avatar-medium">
+                        </a>                   
                     </div>
 
                     <div class="col">
-
-                        <h3>John Doe</h3>
-                        <span class="badge badge-warning">3 annonces</span>                
+                        <a href="{{path('user_show',{'alias' : a.alias })}}">
+                            <h3>{{ a.fullName }}</h3>
+                        </a>
+                        <span class="badge badge-warning">{{a.ads|length}} {% if a.ads|length >1 %} annonces {% else %} annonce {% endif %}</span>                
                     
                     </div>         
                 </div>
 
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum reprehenderit expedita, aperiam atque deleniti quam fugiat sunt odio provident consequuntur rerum eius, fugit inventore maxime, libero dolore fuga vel. Eligendi.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas unde, fuga quam eius modi ad molestiae consequuntur ducimus, fugiat blanditiis quibusdam est magnam iure suscipit, laborum molestias accusamus repudiandae assumenda.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum deleniti aliquid ullam nobis provident rerum repellat, vel molestias saepe. Maxime soluta aspernatur facilis. Porro veniam sunt eligendi esse fugiat sint!</p>
+                <div class="col py-3">
+                    {{ ad.author.introduction|raw }}
+                
+                </div>
                         
             </div>     
         

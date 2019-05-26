@@ -1,0 +1,21 @@
+            {% set url=path('ads_single',{'slug':ad.slug}) %} {# Creation de notre variable vers chaque annonce #}
+
+            <div class="col-md-4">
+                <div class="card">
+
+                    <div class="card-header bg-primary text-light">{{ad.rooms}} chambres <strong>{{ad.price}}&euro;/nuit</strong></div>
+
+                        <div class="card-body">
+                            <a href="{{ url }}">
+                                <img src="{{ad.coverImage}}" alt="{{ad.title}}" class="img-fluid" style="height:20vh;">
+                            </a>
+                            <h4 class="card-title mt-2"><strong>{{ad.title}}</strong></h4>
+                            <p class="card-text">{{ad.introduction}}</p>                        
+                            <a href="{{ url }}" class="btn btn-secondary">+ d'infos</a>
+                        </div>            
+                    
+                        <div class="card-footer text-muted"></div>
+                        <span>Pas encore notée</span>      
+                
+                </div>     
+            </div>

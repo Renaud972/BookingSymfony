@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use dump;
 use App\Entity\Ad;
 use App\Form\AnnonceType;
 use App\Repository\AdRepository;
@@ -78,6 +77,7 @@ class AdController extends AbstractController
                 $manager->persist($image);
             }
 
+            $ad->setAuthor($this->getUser());
             $manager->persist($ad);
             $manager->flush();
 
