@@ -3,17 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\AccountType;
+use App\Entity\PasswordUpdate;
 use App\Form\RegistrationType;
+use App\Form\PasswordUpdateType;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Doctrine\Common\Persistence\ObjectManager;
-use App\Form\AccountType;
-use App\Entity\PasswordUpdate;
-use App\Form\PasswordUpdateType;
-use Symfony\Component\Form\FormError;
 
 class AccountController extends AbstractController
 {
@@ -27,6 +28,7 @@ class AccountController extends AbstractController
         $error = $utils->getLastAuthenticationError();
 
         $username = $utils->getLastUsername();
+        
         return $this->render('account/login.html.twig',[
             'hasError'=>$error!==null,
             'username'=>$username
@@ -80,6 +82,8 @@ class AccountController extends AbstractController
     * Modification du profil utilisateur
     *
     * @Route("account/profile",name="account_profile")
+    * @IsGranted("ROLE_USER")
+    *
     * @return Response
     */
     public function profile(Request $request,ObjectManager $manager){
@@ -108,6 +112,7 @@ class AccountController extends AbstractController
     /**
      * Permet de modifier le mdp
      * @Route("/account/update-password",name="account_password")
+     * @IsGranted("ROLE_USER")
      *
      * @return Response
      */
@@ -167,6 +172,7 @@ class AccountController extends AbstractController
     /**
      * Permet d'afficher la page mon compte
      * @Route("/account",name="account_home")
+     * @IsGranted("ROLE_USER")
      * 
      * @return Response
      */

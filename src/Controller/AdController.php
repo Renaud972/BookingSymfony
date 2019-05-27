@@ -8,6 +8,8 @@ use App\Repository\AdRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdController extends AbstractController
@@ -44,7 +46,8 @@ class AdController extends AbstractController
     /**
      * Création d'annonce
      * @Route("/ads/new",name="ads_create")
-     * @return  response
+     * @IsGranted("ROLE_USER")
+     * @return Response
      */
     public function create(Request $request,ObjectManager $manager){
 
@@ -113,6 +116,7 @@ class AdController extends AbstractController
     /**
      * Permet d'éditer et de modifier un article
      * @Route("/ads/{slug}/edit", name="ads_edit")
+     * @Security("is_granted('ROLE_USER') and user === ad.getAuthor()",message="Cette annonce ne vous appartient pas, vous ne pouvez la modifier")
      *
      * @return Response
      */
@@ -141,6 +145,21 @@ class AdController extends AbstractController
         }
 
         return $this->render('ad/edit.html.twig',['form'=>$form->createView(),'ad'=>$ad]);
+
+    }
+    /** Permet la suppression d'une annonce
+     * @Route("/ads/{slug}/delete", name="ads_delete")
+     * @Security("is_granted(ROLE_USER) and user == ad.getAuthor()",message="Vous ne pouvez accéder à cette ressource !!!")
+     * 
+     * @return Response
+     */
+    public function delete(ObjectManager $manager, Ad $ad){
+
+        $manager->remove($ad);
+        $manager->flush();
+        $this->addFlash("success","L'annonce <em>{$ad->getTitle()}</em> a bien été supprimée");
+
+        return $this->redirectToRoute("account_profile");
 
     }
 
