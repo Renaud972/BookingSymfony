@@ -65,6 +65,57 @@
                         <span class="sr-only">Suivant</span>
                     </a>
                 </div>
+
+                <hr>
+
+                {% if ad.comments|length > 0 %}
+
+                    <h3>Commentaires des locataires</h3>
+
+                    <div class="alert alert-info mt-3">
+                    
+                        <h4 class="alert-heading h5">
+
+                            <div class="row align-items-center">
+
+                                <div class="col-8">
+
+                                        Note globale donnée par les voyageurs:<br>
+
+                                </div>
+
+                                <div class="col-4">
+
+                                    {% include "inc/rating.html.twig" with {'rating' : ad.averageRatings } %}<br>
+
+                                    <small>Cette moyenne est calculée sur {{ad.comments|length}} avis.</small> 
+                        
+                                </div>
+                            </div>
+
+                        </h4>
+                    
+                    </div>
+
+                    {% for comment in ad.comments %}
+
+                        <div class="bg-light-rounded">
+
+                            <p><strong>{{comment.author.fullName}}</strong></p>
+                            <blockquote>{{comment.content}}</blockquote>
+                            <p>Note donnée par les voyageurs:                            
+
+                                {% include "inc/rating.html.twig" with {'rating' : comment.rating } %}
+
+                            </p>                                            
+                        
+                        </div>
+                        
+                    {% endfor %}
+                    
+                {% else %}
+                    <h6>Cette annonce pas pas encore de commentaires.</h6>
+                {% endif %}
             
             </div>
 

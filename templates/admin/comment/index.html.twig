@@ -1,0 +1,45 @@
+{% extends "admin/base.html.twig" %}
+
+{% block title %}Gestion des commentaires{% endblock %}
+
+{% block body %}
+
+    
+
+    <div class="container-fluid">
+
+        <h1 class="my-3">Commentaires</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Commentaire</th>
+                    <th>Date de création</th>
+                    <th>Note</th>
+                    <th>Auteur</th>
+                    <th>Annonce</th>
+                    <th>Modifier</th>
+                    <th>Supprimer</th>
+                </tr>        
+            </thead>
+            <tbody>
+                {% for comment in comments %}
+                    <tr>
+                        <td>{{ comment.id }}</td>
+                        <td>{{ comment.content }}</td>
+                        <td>{{ comment.createdAt|date('d/m/Y H:i') }}</td>
+                        <td>{{ comment.rating }}</td>
+                        <td>{{ comment.author.fullname }}</td>
+                        <td>{{ comment.ad.title}}</td>
+                        <td><a href="{{ path('admin_comment_edit',{'id':comment.id})}}" class="btn btn-primary"><i class="fas fa-edit"></i></a></td>
+                        <td><a href="{{ path('admin_comment_delete',{'id':comment.id})}}" class="btn btn-danger"><i class="fas fa-trash"></i></a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}
+
+

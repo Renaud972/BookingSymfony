@@ -36,7 +36,6 @@ class AdController extends AbstractController
         // 2ème méthode de recup des données ds la bdd puis render ds la view : instenciation ds les param de la fct
     public function index(AdRepository $repo){
         //via $repo, on va chercher toute les annonces.
-        dump($repo);
         $ads = $repo->findAll();
         return $this->render('ad/index.html.twig', [
             'controller_name' => 'Nos annonces',

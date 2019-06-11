@@ -49,6 +49,11 @@ footer {
     max-height: 32px;
 }
 
+.avatar-xs {
+    max-width: 26px;
+    max-height: 26px;
+}
+
 .datepicker table tr td.disabled,
 .datepicker table tr td.disabled:hover {
     color: indianred!important;
@@ -58,4 +63,14 @@ footer {
 .datepicker table tr td.day.focused,
 .datepicker table tr td.day:hover {
     font-weight: bold;
+}
+
+blockquote {
+    font-style: oblique;
+    font-weight: 100;
+    color: rgb(90, 81, 81);
+}
+
+.rating i {
+    color: gold;
 }

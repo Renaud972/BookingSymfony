@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/admin.css">
        
 
     {% block stylesheets %}{% endblock %}
@@ -17,7 +18,7 @@
 
 <body>
 
-    {% include 'inc/header.html.twig' %}
+    {% include 'admin/inc/header.html.twig' %}
 
         {% for label,messages in app.flashes %}            
         
@@ -42,7 +43,7 @@
         {% block body %}{% endblock %}      
         
 
-        {% include 'inc/footer.html.twig' %}
+        {% include 'admin/inc/footer.html.twig' %}
 
         {% block javascripts %}{% endblock %}
 
