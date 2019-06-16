@@ -9,16 +9,30 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Services\Pagination;
+use App\Entity\Booking;
 
 class AdminAdController extends AbstractController
 {
+    //page par defaut = 1 et regex pour un nombre 
+
     /**
-     * @Route("/admin/ads", name="admin_ads_list")
+     * @Route("/admin/ads/{page<\d+>?1}", name="admin_ads_list")
      */
-    public function index(AdRepository $repo)
+    public function index(AdRepository $repo, $page,Pagination $paginationService)
     {
-        return $this->render('admin/ad/index.html.twig',[
-            'ads'=>$repo->findAll()
+        // find() => trouve un objet par rapport à son id
+        // findOneBy()=>trouve une donnée via des critères de recherche
+        // findBy() => trouve plusieurs données grace à des critères
+        $paginationService->setEntityClass(Ad::class)
+                          ->setPage($page)
+                          //->setRoute('admin_ads_list')
+                          ;
+                        
+
+
+        return $this->render('admin/ad/index.html.twig',[ 
+            'pagination'=>$paginationService
         ]);
     }
 
