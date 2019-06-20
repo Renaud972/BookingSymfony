@@ -8,6 +8,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AdminAccountController extends AbstractController
 {
+
     /**
      * @Route("/admin/login", name="admin_account_login")
      */

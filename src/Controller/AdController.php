@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Ad;
 use App\Form\AnnonceType;
-use App\Repository\AdRepository;
+use App\Services\Pagination;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,17 +31,27 @@ class AdController extends AbstractController
     
 
      /**
-     * @Route("/ads", name="ads_list")
+     * @Route("/ads/{page<\d+>?1}", name="ads_list")
      */
         // 2ème méthode de recup des données ds la bdd puis render ds la view : instenciation ds les param de la fct
-    public function index(AdRepository $repo){
+    public function index($page, Pagination $paginationService){
         //via $repo, on va chercher toute les annonces.
-        $ads = $repo->findAll();
+        //$ads = $repo->findAll();
+
+        $paginationService->setEntityClass(Ad::class)
+                          ->setPage($page)
+                          //->setRoute('admin_ads_list')
+                          ->setLimit(9)
+                          ;
+
+
         return $this->render('ad/index.html.twig', [
             'controller_name' => 'Nos annonces',
-            'ads'=>$ads
+            'pagination'=>$paginationService
         ]);
     }
+
+
     /**
      * Création d'annonce
      * @Route("/ads/new",name="ads_create")

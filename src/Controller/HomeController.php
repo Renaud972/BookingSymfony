@@ -3,11 +3,12 @@
 // namespace : chemin du Controller
 namespace App\Controller; // App = Src/
 
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\AdRepository;
+use App\Repository\UserRepository;
 
-// Pour crerr une page :
+// Pour créer une page :
 // - une fonction public (classe)
 // -  une route
 // - une response
@@ -15,14 +16,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController {
 
     /**
-     * Creation de notre 1ère route
+     * Creation de notre 1ère route/redirection auto ners les annonces
      *@Route("/", name="homepage")
      * @return void
      */
-    public function home(){
+    public function home(AdRepository $adRepo, UserRepository $userRepo){
 
-        $nom=['Durand'=>'visiteur','Dupont'=>'admin','Jeanneau'=>'contributeur'];
-        return $this->render('home.html.twig', ['titre'=>'Site d\'annonce !!','acces'=>'visiteur','tableau'=>$nom]);
+        return $this->render('home.html.twig',
+                            [
+                            'ads'=>$adRepo->findBestAds(6),
+                            'users'=>$userRepo->findBestUsers()
+
+                            ]);
 
     }
 

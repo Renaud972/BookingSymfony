@@ -59,7 +59,7 @@ Class Pagination {
         return $this->entityClass;
     }
 
-    //2- Quelle est la limite
+    //2- Quelle est la limite(nb d'objets à afficher)
 
     public function setLimit($limit){
 
@@ -89,6 +89,12 @@ Class Pagination {
     //4-on va chercher le nb total de pages
 
     public function getData(){
+
+        if(empty($this->entityClass)){
+            throw new \Exception("setEntityClass n'a pas été renseignégnée dans le controller correspondant");
+        }
+
+
         //calculer l'offset
 
         $offset = ($this->page * $this->limit) - $this->limit;

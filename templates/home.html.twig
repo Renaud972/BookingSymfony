@@ -4,9 +4,9 @@
 
 {% block body %}
 
-    <main class="container">
+    <main class="container home">
         <div class="jumbotron mt-3">
-            <h1>{{titre}}</h1>
+            <h1>Bookings</h1>
             <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quis, facere quasi vero veritatis atque ipsa quae amet quod quia ad repellendus aut nobis soluta voluptas obcaecati pariatur, officiis impedit.</p>
             <hr class="my-4">
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus neque id vitae repellat nisi, debitis iste expedita ipsum quos at error voluptate corrupti alias nulla pariatur exercitationem inventore rerum dignissimos.</p>
@@ -16,126 +16,38 @@
         </div>
 
 {# section1 #}
-            <h3 class="h1 mt-5 mb-4">Offres Spéciales</h3>
+            <h3 class="h1 mt-5 mb-4">Annonces les mieux notées</h3>
             <section class="row">
-                <article class="col-md-4">
-                    <div class="card mb-3">
-                        <h3 class="h4 card-header">3 chambres, <strong> 200.00 &euro;</strong>/nuit</h3>
-                        <div class="card-body">
-                            <h5 class="card-title">Loft à Londre</h5>
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, odit nemo sit error quasi consequuntur facere earum suscipit expedita sequi a nihil officia impedit debitis cumque harum consectetur eos dolores.</p>
-                        </div>
-                        <img style="height: 200px; width: 100%; display: block;" src="https://placeimg.com/640/480/people" alt="Card image">
-                        <div class="card-body">
-                            <a href="#" class="btn btn-primary">+ infos</a>                        
-                        </div>
-                            <div class="card-footer text-muted">
-                                Pas encore noté
-                            </div>
-                        </div>                 
-                </article>
 
-                <article class="col-md-4">
-                    <div class="card mb-3">
-                        <h3 class="h4 card-header">2 chambres, <strong> 150.00 &euro;</strong>/nuit</h3>
-                        <div class="card-body">
-                            <h5 class="card-title">Maison dans le Main/USA</h5>
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, odit nemo sit error quasi consequuntur facere earum suscipit expedita sequi a nihil officia impedit debitis cumque harum consectetur eos dolores.</p>
-                        </div>
-                        <img style="height: 200px; width: 100%; display: block;" src="https://placeimg.com/640/480/nature" alt="Card image">
-
-                        <div class="card-body">
-                            <a href="#" class="btn btn-primary">+ infos</a>                        
-                        </div>
-                            <div class="card-footer text-muted">
-                                Pas encore noté
-                            </div>
-                        </div>                 
-                </article>
-
-                <article class="col-md-4">
-                    <div class="card mb-3">
-                        <h3 class="h4 card-header">T2, <strong> 400.00 &euro;</strong>/nuit</h3>
-                        <div class="card-body">
-                            <h5 class="card-title">Appartement à Nice</h5>
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, odit nemo sit error quasi consequuntur facere earum suscipit expedita sequi a nihil officia impedit debitis cumque harum consectetur eos dolores.</p>
-                        </div>
-                        <img style="height: 200px; width: 100%; display: block;" src="https://placeimg.com/640/480/tech" alt="Card image">
-
-                        <div class="card-body">
-                            <a href="#" class="btn btn-primary">+ infos</a>                        
-                        </div>
-                            <div class="card-footer text-muted">
-                                Pas encore noté
-                            </div>
-                        </div>                 
-                </article>
-        
+                {% for data in ads %}
+                    {% include 'ad/_ad.html.twig' with {'ad':data.annonce} %}
+                {% endfor %}
+                
         
             </section>
 {# section2 #}
             <h3 class="h1 mt-5 mb-4">Nos meilleurs annonceurs</h3>
             <section class="row">
-                <article class="col-md-3">
-                    <div class="card mb-3">
-                        <h3 class="h4 card-header text-white bg-primary">John Doe</h3>
-                        <div class="card-body">
-                            <img src="https://place-hold.it/64x64" alt="Avatar" class="float-left mr-3">
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, odit nemo sit error quasi consequuntur facere earum suscipit expedita sequi a nihil officia impedit debitis cumque harum consectetur eos dolores.</p>
-                        </div>
 
-                        <div class="card-body">
-                            <a href="#" class="btn btn-primary">+ infos</a>                        
-                        </div>
+                {% for data in users %}
+                    
+                
+                    <article class="col">
+                        <div class="card mb-3">
+                            <h3 class="h4 card-header text-white bg-primary">{{data.user.fullName}}</h3>
+                            <div class="card-body">
+                                <img src="{{data.user.avatar}}" alt="Avatar de {{data.user.fullName}}" class="float-left mr-3">
+                                <p>{{data.user.introduction}}</p>
+                            </div>
 
-                        </div>                 
-                </article>
+                            <div class="card-body">
+                                <a href="{{path('user_show',{'alias':data.user.alias})}}" class="btn btn-warning text-primary">+ infos</a>                        
+                            </div>
 
-                <article class="col-md-3">
-                    <div class="card mb-3">
-                        <h3 class="h4 card-header text-white bg-primary">John Doe</h3>
-                        <div class="card-body">
-                            <img src="https://place-hold.it/64x64" alt="Avatar" class="float-left mr-3">
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, odit nemo sit error quasi consequuntur facere earum suscipit expedita sequi a nihil officia impedit debitis cumque harum consectetur eos dolores.</p>
-                        </div>
+                            </div>                 
+                    </article>
 
-                        <div class="card-body">
-                            <a href="#" class="btn btn-primary">+ infos</a>                        
-                        </div>
-
-                        </div>                 
-                </article>
-
-                <article class="col-md-3">
-                    <div class="card mb-3">
-                        <h3 class="h4 card-header text-white bg-primary">John Doe</h3>
-                        <div class="card-body">
-                            <img src="https://place-hold.it/64x64" alt="Avatar" class="float-left mr-3">
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, odit nemo sit error quasi consequuntur facere earum suscipit expedita sequi a nihil officia impedit debitis cumque harum consectetur eos dolores.</p>
-                        </div>
-
-                        <div class="card-body">
-                            <a href="#" class="btn btn-primary">+ infos</a>                        
-                        </div>
-
-                        </div>                 
-                </article>
-
-                <article class="col-md-3">
-                    <div class="card mb-3">
-                        <h3 class="h4 card-header text-white bg-primary">John Doe</h3>
-                        <div class="card-body">
-                            <img src="https://place-hold.it/64x64" alt="Avatar" class="float-left mr-3">
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, odit nemo sit error quasi consequuntur facere earum suscipit expedita sequi a nihil officia impedit debitis cumque harum consectetur eos dolores.</p>
-                        </div>
-
-                        <div class="card-body">
-                            <a href="#" class="btn btn-primary">+ infos</a>                        
-                        </div>
-
-                        </div>                 
-                </article>                
-        
+                {% endfor %}
         
             </section>
 
